@@ -61,7 +61,7 @@ const Header = () => {
           <img
           //@ts-ignore
             src={session?.user?.avatar}
-            alt={session?.user?.name}
+            alt={session?.user?.name as any}
             className="w-12 h-12 rounded-full object-cover"
           />
           <p>{session?.user?.name}</p>
