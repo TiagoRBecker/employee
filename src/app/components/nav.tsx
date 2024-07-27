@@ -59,6 +59,7 @@ const Header = () => {
         </div>
         <div className="hidden md:flex items-center gap-2 cursor-pointer">
           <img
+          //@ts-ignore
             src={session?.user?.avatar}
             alt={session?.user?.name}
             className="w-12 h-12 rounded-full object-cover"
