@@ -12,6 +12,7 @@ import {
 
 const Header = () => {
   const { data: session } = useSession();
+   console.log(session)
   const MenuIcon = () => {
     return (
       <svg
