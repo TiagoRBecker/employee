@@ -19,7 +19,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "text", placeholder: "jsmith@example.com" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req): Promise<any> {
+      async authorize(credentials: any, req: any): Promise<any> {
         try {
           const authLogin = await fetch(`${authUrl}/signin/employee`, {
             method: "POST",
@@ -28,35 +28,33 @@ export const authOptions: NextAuthOptions = {
             },
             body: JSON.stringify({ credentials }),
           });
-
-          // Check if the response is successful
+      
           if (!authLogin.ok) {
+            
             const errorData = await authLogin.json();
-            const errorMessage = errorData.message || "Erro na autenticação";
-            throw new Error(errorMessage);
+            console.log(errorData);
+            throw new Error(errorData.message || 'Erro desconhecido na autenticação');
           }
-
-          // Parse the response JSON
+      
           const data = await authLogin.json();
-          
-          // Check if data and accessToken exist
+      
           if (data && data.accessToken) {
             return {
               id: data.id,
               name: data.name,
               email: data.email,
-              avatar:data.avatar,
+              avatar: data.avatar,
               accessToken: data.accessToken,
-              // Add other properties as needed
             };
-          } else {
-            throw new Error("Dados inválidos retornados pelo servidor");
           }
-        } catch (error:any) {
-          console.error("Erro na autenticação:", error?.message);
-          throw new Error("Falha na autenticação");
+          
+          throw new Error('Dados de autenticação inválidos');
+        } catch (error: any) {
+          console.error("Erro na autenticação", error);
+          throw error; // Re-throwing the error so it can be handled by the caller
         }
-      },
+      }
+      
     }),
   ],
   callbacks: {

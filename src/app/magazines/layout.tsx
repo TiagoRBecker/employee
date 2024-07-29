@@ -4,6 +4,7 @@ import "./globals.css"
 
 
 import Nav from "@/src/app/components/nav"
+import Footer from "../components/footer";
 export const metadata: Metadata = {
   title: "Colaboradoes Plhas Magazine",
   description: "Colaboradoes Plhas Magazine",
@@ -23,6 +24,8 @@ export default function NavLayout({
      
 
        <main>{children}</main>
+
+       <Footer/>
 
    
     </div>
